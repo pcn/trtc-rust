@@ -1,0 +1,5 @@
+Note: even though the book has the generic idea of a tuple that gets
+stretched out to be a vector, a point, a color, etc., I think that
+it'd make more sense to use a struct for each, and construct
+implementations on the various structs that will do the right thing
+for intended operations, like adding two points to create a vector.

@@ -1,0 +1,22 @@
+[package]
+name = "trtc"
+version = "0.1.0"
+authors = ["Peter C. Norton <spacey@spacey.org>"]
+# Can't yet use the 2018 edition with cucumber-rust
+edition = "2018"
+
+[dependencies]
+typename = "0.1.1"
+docopt = "1"
+serde = { version = "1", features = ["derive"] }
+
+[[test]]
+name = "tuples"
+harness = false  # Allows Cucumber to print output instead of libtest
+
+[[test]]
+name = "colors"
+
+[dev-dependencies]
+cucumber = { package = "cucumber_rust", version = "^0.6.4" }
+
