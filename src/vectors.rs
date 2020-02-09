@@ -1,11 +1,11 @@
 // #[macro_use]
 // extern crate typename;
 #![warn(unused_imports)]
-use std::ops::{Add, Sub, Neg, Mul, Div};
+use std::ops::{Add, Sub, Neg, Mul};
 use std::cmp::PartialEq;
-use equal;
-use tuples::{Tuple,ToTuple};
-use points::{Point,point};
+use crate::equal;
+use crate::tuples::{Tuple,ToTuple};
+use crate::points::{Point,point};
 
 #[derive(TypeName, Debug, Clone, Copy)]
 pub struct Vector {

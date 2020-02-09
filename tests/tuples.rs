@@ -51,7 +51,7 @@ mod tuples_steps {
     use trtc::vectors::{Vector, vector, magnitude, normalize, dot, cross};
     use trtc::points::{Point, point};
     use trtc::tuples::{Tuple, tuple};
-    steps!(::MyWorld => {
+    steps!(crate::MyWorld => {
         // Scenario: A tuple with w=1 is a point
         given regex r#"a is a tuple of ([-0-9.]+), ([-0-9.]+), ([-0-9.]+), ([-0-9.]+)"# (f64, f64, f64, f64) | world, x, y , z, w, _step| {
             // XXX I don't think this is a good thing for types. Re-visit this later? -PCN
@@ -294,8 +294,8 @@ mod tuples_steps {
 }
 
 cucumber! {
-    features: "./features", // Path to our feature files
-    world: ::MyWorld, // The world needs to be the same for steps and the main cucumber call
+    features: "./features/tuples", // Path to our feature files
+    world: crate::MyWorld, // The world needs to be the same for steps and the main cucumber call
     steps: &[
         tuples_steps::steps // the `steps!` macro creates a `steps` function in a module
     ]

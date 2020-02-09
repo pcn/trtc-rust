@@ -1,9 +1,9 @@
 // #[macro_use]
 // extern crate typename;
 #![warn(unused_imports)]
-use std::ops::{Add, Sub, Neg, Mul, Div};
+use std::ops::{Add, Sub, Neg};
 use std::cmp::PartialEq;
-use vectors::{Vector,vector};
+use crate::vectors::{Vector,vector};
 
 #[derive(TypeName, Debug, PartialEq, Clone, Copy)]
 pub struct Point {

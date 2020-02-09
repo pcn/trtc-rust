@@ -9,7 +9,7 @@ pub mod colors;
 const EPSILON: f64 = 0.00001;
 
 // A test for "equal enough" for f64 numbers
-pub fn equal(a: f64, b: f64) -> bool {
+fn equal(a: f64, b: f64) -> bool {
     f64::abs(a - b) < EPSILON
 }
 
