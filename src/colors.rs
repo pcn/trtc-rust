@@ -1,7 +1,7 @@
 // #[macro_use]
 // extern crate typename;
 #![warn(unused_imports)]
-use std::ops::{Add, Sub, Neg, Mul, Div};
+use std::ops::{Add, Sub, Mul};
 use std::cmp::PartialEq;
 use crate::equal;
 // use crate::tuples::{Tuple,ToTuple};

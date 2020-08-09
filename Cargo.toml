@@ -8,6 +8,7 @@ edition = "2018"
 typename = "0.1.1"
 docopt = "1"
 serde = { version = "1", features = ["derive"] }
+ndarray = "^0.13.0"
 
 [[test]]
 name = "tuples"
@@ -21,6 +22,11 @@ harness = false  # Allows Cucumber to print output instead of libtest
 [[test]]
 name = "canvas"
 harness = false  # Allows Cucumber to print output instead of libtest
+
+[[test]]
+name = "matrix"
+harness = false  # Allows Cucumber to print output instead of libtest
+
 
 [dev-dependencies]
 cucumber = { package = "cucumber_rust", version = "^0.6.0" }

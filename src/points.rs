@@ -1,5 +1,4 @@
 // #[macro_use]
-// extern crate typename;
 #![warn(unused_imports)]
 use std::ops::{Add, Sub, Neg};
 use std::cmp::PartialEq;

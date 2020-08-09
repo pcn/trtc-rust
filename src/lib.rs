@@ -5,6 +5,8 @@ pub mod tuples;
 pub mod vectors;
 pub mod points;
 pub mod colors;
+pub mod canvas;
+pub mod matrix;
 
 const EPSILON: f64 = 0.00001;
 

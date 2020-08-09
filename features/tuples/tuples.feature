@@ -38,12 +38,12 @@ Feature: A tuple 2 different ways gives us either a point or a vector
     And p2 <- point(5, 6, 7)
     Then p1 - p2 == vector(-2, -4, -6)
 
-  Scenario: Subtacting a vector from a point
+  Scenario: Subtracting a vector from a point
     Given p <- point(3, 2, 1)
     And v <- vector(5, 6, 7)
     Then p - v == point(-2, -4, -6) 
 
-  Scenario: Subtacting two vectors
+  Scenario: Subtracting two vectors
     Given v1 <- vector(3, 2, 1)
     And v2 <- vector(5, 6, 7)
     Then v1 - v2 == vector(-2, -4, -6) 
