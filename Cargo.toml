@@ -8,7 +8,6 @@ edition = "2018"
 typename = "0.1.1"
 docopt = "1"
 serde = { version = "1", features = ["derive"] }
-ndarray = "^0.13.0"
 
 [[test]]
 name = "tuples"
