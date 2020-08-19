@@ -26,6 +26,10 @@ harness = false  # Allows Cucumber to print output instead of libtest
 name = "matrix"
 harness = false  # Allows Cucumber to print output instead of libtest
 
+[[test]]
+name = "transformations"
+harness = false  # Allows Cucumber to print output instead of libtest
+
 
 [dev-dependencies]
 cucumber = { package = "cucumber_rust", version = "^0.6.0" }

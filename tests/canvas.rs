@@ -8,7 +8,7 @@ use typename::{TypeName};
 extern crate trtc;
 use trtc::canvas::{Canvas, canvas};
 use trtc::colors::{Color}; 
-use ndarray::Array2;
+// use ndarray::Array2;
 
 #[derive(TypeName)]
 pub struct MyWorld {

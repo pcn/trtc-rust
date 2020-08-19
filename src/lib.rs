@@ -7,8 +7,9 @@ pub mod points;
 pub mod colors;
 pub mod canvas;
 pub mod matrix;
+pub mod transformations;
 
-const EPSILON: f64 = 0.00001;
+pub const EPSILON: f64 = 0.0001;
 
 // A test for "equal enough" for f64 numbers
 fn equal(a: f64, b: f64) -> bool {

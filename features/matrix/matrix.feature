@@ -156,9 +156,9 @@ Scenario: Calculating a cofactor of a 3x3 matrix
     |     2 |     -1 |    -7 |
     |     6 |     -1 |     5 |
   Then minor(A, 0, 0) == -12
-  And cofactor(A, 0, 0) == -12
+  And 1 cofactor(A, 0, 0) == -12
   And minor(A, 1, 0) == 25
-  And cofactor(A, 1, 0) == -25
+  And 1 cofactor(A, 1, 0) == -25
 
 Scenario: Calculating the determinant of a 3x3 matrix
   Given the following 3x3 matrix M3A-5:
@@ -166,11 +166,10 @@ Scenario: Calculating the determinant of a 3x3 matrix
     |     1 |      2 |     6 |
     |    -5 |      8 |    -4 |
     |     2 |      6 |     4 |
-  Then cofactor(A, 0, 0) == 690
-  And cofactor(A, 0, 1) == 447
-  And cofactor(A, 0, 2) == 210
-  And cofactor(A, 0, 3) == 51
-  And determinant(A) == -4071
+  Then 2 cofactor(A, 0, 0) == 56
+  And 2 cofactor(A, 0, 1) == 12
+  And 2 cofactor(A, 0, 2) == -46
+  And 2 determinant(A) == -196
 
 Scenario: Calculating the determinant of a 4x4 matrix
   Given the following 4x4 matrix M4A-7:
@@ -179,9 +178,97 @@ Scenario: Calculating the determinant of a 4x4 matrix
     |    -3 |      1 |     7 |      3 |
     |     1 |      2 |    -9 |      6 |
     |    -6 |      7 |     7 |     -9 |
-  Then cofactor(A, 0, 0) == 690
-  And cofactor(A, 0, 1) == 447
-  And cofactor(A, 0, 2) == 210
-  And cofactor(A, 0, 3) == 51
-  And determinant(A) == -4071
+  Then 3 cofactor(A, 0, 0) == 690
+  And 3 cofactor(A, 0, 1) == 447
+  And 3 cofactor(A, 0, 2) == 210
+  And 3 cofactor(A, 0, 3) == 51
+  And 3 determinant(A) == -4071
  
+Scenario: Testing an invertible matrix for invertibility
+  Given the following 4x4 matrix M4A-8:
+    | First | Second | Third | Fourth |
+    |     6 |      4 |     4 |      4 |
+    |     5 |      5 |     7 |      6 |
+    |     4 |     -9 |     3 |     -7 |
+    |     9 |      1 |     7 |     -6 |
+  Then determinant(M4A-8) == -2120
+  And M4A-8 is invertible
+
+Scenario: Testing a noninvertible matrix for invertibility
+  Given the following 4x4 matrix M4A-9:
+    | First | Second | Third | Fourth |
+    |    -4 |      2 |    -2 |     .3 |
+    |     9 |      6 |     2 |      6 |
+    |     0 |     -5 |     1 |     -5 |
+    |     0 |      0 |     0 |      0 |
+  Then determinant(M4A-9) == 0
+  And M4A-9 is not invertible
+
+Scenario: Calculating the inverse of a matrix
+  Given the following 4x4 matrix M4A-10:
+    | First | Second | Third | Fourth |
+    |    -5 |      2 |     6 |     -8 |
+    |     1 |     -5 |     1 |      8 |
+    |     7 |      7 |    -6 |     -7 |
+    |     1 |     -3 |     7 |      4 |
+  And B <- inverse(M4A-10)
+  Then determinant(M4A-10) == 532
+  And cofactor(M4A-10, 2, 3) == -160
+  And B[3,2] == -160/532
+  And B is the following 4x4 matrix:
+    |    First |   Second |    Third |   Fourth |
+    |  0.21805 |  0.45113 |   .24060 | -0.04511 |
+    | -0.80827 | -1.45677 | -0.44361 |  0.52068 |
+    | -0.07895 | -0.22368 | -0.05263 |  0.19737 |
+    | -0.52256 | -0.81391 | -0.30075 |  0.30639 |
+    
+Scenario: Calculating the inverse of another matrix
+  Given the following 4x4 matrix M4A-11:
+    | First | Second | Third | Fourth |
+    |     8 |     -5 |     9 |      2 |
+    |     7 |      5 |     6 |      1 |
+    |    -6 |      0 |     9 |      6 |
+    |    -3 |      0 |    -9 |     -4 |
+  Then inverse(M4A-11) is the following 4x4 matrix:
+    |    First |   Second |    Third |   Fourth |
+    | -0.15385 | -0.15385 | -0.28205 | -0.53846 |
+    | -0.07692 |  0.12308 |  0.02564 |  0.03077 |
+    |  0.35897 |  0.35897 |  0.43590 |  0.92308 |
+    | -0.69231 | -0.69231 | -0.76923 | -1.92308 |
+    
+Scenario: Calculating the inverse of a third matrix
+  Given the following 4x4 matrix M4A-12:
+    | First | Second | Third | Fourth |
+    |     9 |      3 |     0 |      9 |
+    |    -5 |     -2 |    -6 |     -3 |
+    |    -4 |      9 |     6 |      4 |
+    |    -7 |      6 |     6 |      2 |
+  Then inverse(M4A-12) is the following 4x4 matrix:
+    |    First |   Second |    Third |   Fourth |
+    | -0.04074 | -0.07778 |  0.14444 | -0.22222 |
+    | -0.07778 |  0.03333 |  0.36667 | -0.33333 |
+    | -0.02901 | -0.14630 | -0.10926 |  0.12963 |
+    |  0.17778 |  0.06667 | -0.26667 |  0.33333 |
+
+Scenario: Multiplying a product by its inverse
+  Given the following 4x4 matrix M4A-13:
+    | First | Second | Third | Fourth |
+    |     3 |     -9 |     7 |      3 |
+    |     3 |     -8 |     2 |     -9 |
+    |    -4 |      4 |     4 |      1 |
+    |    -6 |      5 |    -1 |      1 |
+  And the following 4x4 matrix M4B-13:
+    | First | Second | Third | Fourth |
+    |     8 |      2 |     2 |      2 |
+    |     3 |     -1 |     7 |      0 |
+    |     7 |      0 |     5 |      4 |
+    |     6 |     -2 |     0 |      5 |
+  And C <- M4A-13 * M4B-13
+  Then C * inverse(M4B-13) == A
+ 
+
+
+
+    
+
+

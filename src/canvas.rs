@@ -10,3 +10,6 @@ pub fn canvas(width: u32, height: u32) -> Canvas {
     vec![vec![empty_color; height as usize]; width as usize]
 }
                              
+// Local Variables:
+// cargo-test-arguments: "--test canvas"
+// End:
