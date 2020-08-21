@@ -85,6 +85,18 @@ Scenario: Multiplying two matrices
     |    16 |     26 |    46 |     42 |
 
 
+# I missed this earlier!
+Scenario: A matrix multiplied by a tuple
+  Given the following matrix M4A-3fix1:
+    | first | second | third | fourth |
+    |     1 |      2 |     3 |      4 |
+    |     2 |      4 |     4 |      2 |
+    |     8 |      6 |     4 |      1 |
+    |     0 |      0 |     0 |      1 |
+  And b <- tuple(1, 2, 3, 1)
+  Then M4A-3fix1 * b == tuple(18, 24, 33, 1)
+
+
 Scenario: Multiplying a matrix by the identity matrix
   Given the following matrix M4A-4:
     | first | second | third | fourth |

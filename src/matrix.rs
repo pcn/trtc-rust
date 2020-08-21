@@ -2,6 +2,7 @@
 use std::cmp::PartialEq;
 use std::ops::Mul; // {Add, Sub};
 use crate::equal;
+use crate::tuples::{Tuple, tuple};
 
 // TODO: implement a from vec for this, with something like this:
 //
@@ -79,6 +80,25 @@ impl Mul<Mat4> for Mat4 {
         result
     }
 }
+
+impl Mul<Tuple> for Mat4 {
+    type Output = Tuple;
+
+    fn mul(self, rhtup: Tuple) -> Self::Output {
+        let mut retval = vec![0.0, 0.0, 0.0, 0.0];
+
+             
+        for (r_idx, row) in self.rows.iter().enumerate() {
+            retval[r_idx] = row[0] * rhtup.x +
+                row[1] * rhtup.y +
+                row[2] * rhtup.z +
+                row[3] * rhtup.w 
+        }
+        return tuple(retval[0], retval[1], retval[2], retval[3])
+    }
+}
+    
+
 
 impl PartialEq for Mat4 {
     fn eq(&self, other: &Mat4) -> bool {

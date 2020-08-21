@@ -8,6 +8,7 @@ use typename::TypeName;
 
 extern crate trtc;
 use trtc::matrix::{Mat2,Mat3,Mat4};
+use trtc::tuples::{tuple, Tuple};
 
 #[derive(TypeName)]
 pub struct MyWorld {
@@ -17,7 +18,7 @@ pub struct MyWorld {
     m4: Mat4,
     m4b: Mat4,
     m4c: Mat4,    
-//    sm1: SmallMatrix,
+    tuple: Tuple,
 }
 
 impl cucumber::World for MyWorld {}
@@ -40,7 +41,9 @@ impl std::default::Default for MyWorld {
             m4c: Mat4 {
                 ..Default::default()
             },
-//            sm1: 
+            tuple: Tuple {
+                ..Default::default()
+            }
         }
     }
 }
@@ -54,6 +57,7 @@ mod tuples_steps {
                        transpose_m4, determinant_2, submatrix_3, submatrix_4};
     use crate::trtc::matrix::Matrix; // Get its traits
     use crate::trtc::EPSILON;
+    use trtc::tuples::{tuple, Tuple};
     steps!(crate::MyWorld => {
         // Scenario: Constructing and inspecting a 4x4 matrix
         given r#"the following 4x4 matrix M4:"#  | world, _step| {
@@ -165,6 +169,23 @@ mod tuples_steps {
             let actual_result = world.m4 * world.m4b;
             assert_eq!(expected_result, actual_result);
         };
+
+        // Scenario: A matrix multiplied by a tuple
+        given "the following matrix M4A-3fix1:"  | world, _step| {
+            // XXX: cucumber-rust wants the first line of the table to be a heading,
+            // which the book seems to not do.  So I'm going to change the feature file.
+            // XXX I don't think this is a good thing for types. Re-visit this later? -PCN
+            let table = _step.table().unwrap().clone();
+            world.m4 = from_vec4(table.rows);
+        };
+        given regex r#"b <- tuple\(([-0-9]+), ([-0-9]+), ([-0-9]+), ([-0-9]+)\)"# (f64, f64, f64, f64) | world, x, y, z, w, _step | {
+            world.tuple = tuple(x, y, z, w);
+        };
+        then regex r#"M4A-3fix1 \* b == tuple\(([-0-9]+), ([-0-9]+), ([-0-9]+), ([-0-9]+)\)"# (f64, f64, f64, f64) | world, x, y, z, w, _step | {
+            assert_eq!(world.m4 * world.tuple, tuple(x, y, z, w))
+        };
+        
+        
         given "the following matrix M4A-4:"  | world, _step| {
             // XXX: cucumber-rust wants the first line of the table to be a heading,
             // which the book seems to not do.  So I'm going to change the feature file.
